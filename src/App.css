@@ -1,0 +1,53 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+}
+
+.logo > img {
+  width: 75px;
+  padding-left: 20px;
+}
+
+.nav-list > ul > li {
+  list-style-type: none;
+  padding: 0px 10px;
+  font-size: large;
+}
+
+.nav-list > ul {
+  display: flex;
+  padding-right: 20px;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar {
+  padding: 10px;
+}
+
+.card {
+  border: 1px solid black;
+  width: 200px;
+  height: 250px;
+  border-radius: 3%;
+  background-color: gainsboro;
+}
+
+.foodimg > img {
+  width: 200px;
+  border-radius: 3%;
+}
+
+.resInfo {
+  text-align: center;
+  padding: 10px 0px;
+}
+
+.resInfo > div {
+  padding: 0.5%;
+}
