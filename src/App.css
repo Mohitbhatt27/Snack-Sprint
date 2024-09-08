@@ -86,3 +86,11 @@
   font-size: large;
   font-weight: bold;
 }
+
+
+.filter-btn, .allRes-btn {
+  cursor: pointer;
+  margin: 20px;
+  margin-left: 40px;
+  font-size: large;
+}
