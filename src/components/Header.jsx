@@ -1,5 +1,5 @@
 import Logo from "../assets/Logo.png";
-export const Header = () => {
+const Header = () => {
   return (
     <div className="header">
       <div className="logo">
@@ -17,3 +17,5 @@ export const Header = () => {
     </div>
   );
 };
+
+export default Header;

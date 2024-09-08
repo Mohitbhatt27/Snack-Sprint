@@ -1,4 +1,4 @@
-export const Card = ({ name, cusine, ratings, eta, foodImg }) => {
+const Card = ({ name, cusine, ratings, eta, foodImg }) => {
   return (
     <div className="card">
       <div className="foodimg">
@@ -13,3 +13,5 @@ export const Card = ({ name, cusine, ratings, eta, foodImg }) => {
     </div>
   );
 };
+
+export default Card;
