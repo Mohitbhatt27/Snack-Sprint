@@ -1,17 +1,26 @@
 import Card from "./Card";
 import { FOODIMG } from "../utils/constants";
-import { RESTAURANTS } from "../utils/constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Body = () => {
-  const [restaurantList, setRestaurantList] = useState(RESTAURANTS);
+  const [restaurantList, setRestaurantList] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.908877821658663&lng=80.97121808677912&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+
+    const JSONdata = await data.json();
+    setRestaurantList(JSONdata?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+  };
   const filterHandler = () => {
     setRestaurantList(
       restaurantList.filter((restaurant) => restaurant.info.avgRating >= 4)
     );
-  };
-  const allResHandler = () => {
-    setRestaurantList(RESTAURANTS);
   };
   return (
     <div className="body">
@@ -19,9 +28,6 @@ const Body = () => {
       <div className="filter">
         <button className="filter-btn" onClick={filterHandler}>
           Top rated Restaurants
-        </button>
-        <button className="allRes-btn" onClick={allResHandler}>
-          List all Restaurants
         </button>
       </div>
       <div className="card-container">
@@ -41,3 +47,5 @@ const Body = () => {
 };
 
 export default Body;
+
+// data -> cards[4] -> card -> card -> card -> gridElements -> infoWithStyle ->restaurants -> 8elem-> each elem info
