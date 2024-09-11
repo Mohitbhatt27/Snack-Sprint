@@ -87,10 +87,25 @@
   font-weight: bold;
 }
 
-
-.filter-btn, .allRes-btn {
+.filter-btn,
+.allRes-btn {
   cursor: pointer;
   margin: 20px;
   margin-left: 40px;
   font-size: large;
+}
+
+.shimmer {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 120px;
+  justify-content: flex-start;
+}
+
+.shimmerCard {
+  height: 300px;
+  width: 300px;
+  border-radius: 3%;
+  background-color: gainsboro;
+  margin: 15px;
 }

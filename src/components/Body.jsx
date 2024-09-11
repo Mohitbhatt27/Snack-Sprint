@@ -1,4 +1,5 @@
 import Card from "./Card";
+import Shimmer from "./Shimmer";
 import { FOODIMG } from "../utils/constants";
 import { useEffect, useState } from "react";
 
@@ -15,13 +16,21 @@ const Body = () => {
     );
 
     const JSONdata = await data.json();
-    setRestaurantList(JSONdata?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setRestaurantList(
+      JSONdata?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
   };
   const filterHandler = () => {
     setRestaurantList(
       restaurantList.filter((restaurant) => restaurant.info.avgRating >= 4)
     );
   };
+
+  if (restaurantList.length == 0) {
+    return <Shimmer/>;
+  }
+
   return (
     <div className="body">
       <div className="search-bar">SearchBar</div>
