@@ -5,10 +5,21 @@ import { useEffect, useState } from "react";
 
 const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
+  const [filteredListOfRestaurant, setFilteredListOfRestaurant] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  const searchHandler = (e) => {
+    setSearchText(e.target.value);
+    setFilteredListOfRestaurant(
+      restaurantList.filter((restaurant) =>
+        restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
+      )
+    );
+  };
 
   const fetchData = async () => {
     const data = await fetch(
@@ -20,6 +31,10 @@ const Body = () => {
       JSONdata?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
+    setFilteredListOfRestaurant(
+      JSONdata?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
   };
   const filterHandler = () => {
     setRestaurantList(
@@ -27,20 +42,38 @@ const Body = () => {
     );
   };
 
+  const showAllResHandler = () => {
+    setFilteredListOfRestaurant(restaurantList);
+  };
+
   if (restaurantList.length == 0) {
-    return <Shimmer/>;
+    return <Shimmer />;
   }
 
   return (
     <div className="body">
-      <div className="search-bar">SearchBar</div>
-      <div className="filter">
-        <button className="filter-btn" onClick={filterHandler}>
-          Top rated Restaurants
-        </button>
+      <div className="bodyTop">
+        <div className="search-bar">
+          <input
+            type="textbox"
+            placeholder="search items here"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <button onClick={searchHandler}>Search</button>
+        </div>
+        <div className="filter">
+          <button className="filter-btn" onClick={filterHandler}>
+            Top rated Restaurants
+          </button>
+          <button className="filter-btn" onClick={showAllResHandler}>
+            Show all Restaurants
+          </button>
+        </div>
       </div>
+
       <div className="card-container">
-        {restaurantList.map((restaurant) => (
+        {filteredListOfRestaurant.map((restaurant) => (
           <Card
             name={restaurant.info.name}
             cusine={restaurant.info.cuisines.join(", ")}
