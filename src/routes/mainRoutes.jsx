@@ -1,10 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-import AboutUs from "../pages/AboutUs";
+// import AboutUs from "../pages/AboutUs";
 import Contact from "../pages/Contact";
 import App from "../App";
 import Error from "../components/Error";
 import Body from "../components/Body";
 import RestaurantMenu from "../pages/RestaurantMenu";
+import { lazy, Suspense } from "react";
+
+// eslint-disable-next-line react-refresh/only-export-components
+const AboutUs = lazy(() => import("../pages/AboutUs"));
 
 const mainRoutes = createBrowserRouter([
   {
@@ -18,7 +22,11 @@ const mainRoutes = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <AboutUs />,
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <AboutUs />
+          </Suspense>
+        ),
       },
       {
         path: "/contact",
