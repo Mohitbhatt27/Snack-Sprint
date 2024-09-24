@@ -2,11 +2,13 @@ import Card from "./Card";
 import Shimmer from "./Shimmer";
 import { FOODIMG } from "../utils/constants";
 import { useEffect, useState } from "react";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredListOfRestaurant, setFilteredListOfRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const onlineStatus = useOnlineStatus();
 
   useEffect(() => {
     fetchData();
@@ -49,6 +51,8 @@ const Body = () => {
   if (restaurantList.length == 0) {
     return <Shimmer />;
   }
+
+  if (!onlineStatus) return <h2>Looks like you are offline right now</h2>;
 
   return (
     <div className="body">
