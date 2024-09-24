@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Card, { withPromoted } from "./Card";
 import Shimmer from "./Shimmer";
 import { FOODIMG } from "../utils/constants";
 import { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ const Body = () => {
   const [filteredListOfRestaurant, setFilteredListOfRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const onlineStatus = useOnlineStatus();
+  const PromotedCard = withPromoted(Card);
 
   useEffect(() => {
     fetchData();
@@ -29,6 +30,10 @@ const Body = () => {
     );
 
     const JSONdata = await data.json();
+    console.log(
+      JSONdata?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
     setRestaurantList(
       JSONdata?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
@@ -77,16 +82,28 @@ const Body = () => {
       </div>
 
       <div className="card-container">
-        {filteredListOfRestaurant.map((restaurant) => (
-          <Card
-            name={restaurant.info.name}
-            cusine={restaurant.info.cuisines.join(", ")}
-            ratings={restaurant.info.avgRating}
-            eta={restaurant.info.sla.deliveryTime}
-            foodImg={FOODIMG + restaurant.info.cloudinaryImageId}
-            key={restaurant.info.id}
-          />
-        ))}
+        {filteredListOfRestaurant.map((restaurant) =>
+          !(restaurant.info.locality) ? (
+            <Card
+              name={restaurant.info.name}
+              cusine={restaurant.info.cuisines.join(", ")}
+              ratings={restaurant.info.avgRating}
+              eta={restaurant.info.sla.deliveryTime}
+              foodImg={FOODIMG + restaurant.info.cloudinaryImageId}
+              key={restaurant.info.id}
+            />
+          ) : (
+            <PromotedCard
+              key={restaurant.info.id}
+              name={restaurant.info.name}
+              cusine={restaurant.info.cuisines.join(", ")}
+              ratings={restaurant.info.avgRating}
+              eta={restaurant.info.sla.deliveryTime}
+              foodImg={FOODIMG + restaurant.info.cloudinaryImageId}
+              locality={restaurant.info.locality}
+            />
+          )
+        )}
       </div>
     </div>
   );

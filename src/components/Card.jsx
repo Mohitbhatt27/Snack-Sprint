@@ -14,4 +14,16 @@ const Card = ({ name, cusine, ratings, eta, foodImg }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
+export const withPromoted = (Card) => {
+  // eslint-disable-next-line react/display-name
+  return (props) => {
+    return ( 
+    <div>
+     <div></div> 
+    <Card {...props} />
+    </div>
+  )};
+}
+
 export default Card;
