@@ -1,6 +1,12 @@
-const Card = ({ name, cusine, ratings, eta, foodImg }) => {
+import { useNavigate } from "react-router-dom";
+
+const Card = ({ name, cusine, ratings, eta, foodImg, id }) => {
+  const navigate = useNavigate();
+  const handleCardOnClick = () => {
+    navigate(`restaurant/${id}`);
+  };
   return (
-    <div className="card">
+    <div className="card" onClick={handleCardOnClick}>
       <div className="foodimg">
         <img src={foodImg} alt="food-item" />
       </div>
@@ -13,17 +19,5 @@ const Card = ({ name, cusine, ratings, eta, foodImg }) => {
     </div>
   );
 };
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const withPromoted = (Card) => {
-  // eslint-disable-next-line react/display-name
-  return (props) => {
-    return ( 
-    <div>
-     <div></div> 
-    <Card {...props} />
-    </div>
-  )};
-}
 
 export default Card;

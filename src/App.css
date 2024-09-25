@@ -22,6 +22,7 @@
 .logo > img {
   width: 75px;
   padding-left: 20px;
+  cursor: pointer;
 }
 
 .nav-list > ul > li {
@@ -137,4 +138,42 @@
 .aboutUs {
   border: 1px solid black;
   padding: 10px;
+}
+
+.restaurant-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  width: 80%;
+  padding: 20px;
+}
+
+.category{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  width: 80%;
+  padding: 20px;
+}
+
+.eachCategory{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin: 10px;
+  flex-wrap: wrap;
+  width: 80%;
+  padding: 20px;
+  border: 1px solid gray;
+  cursor: pointer;
 }

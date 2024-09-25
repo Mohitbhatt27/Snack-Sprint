@@ -1,4 +1,4 @@
-import Card, { withPromoted } from "./Card";
+import Card from "./Card";
 import Shimmer from "./Shimmer";
 import { FOODIMG } from "../utils/constants";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ const Body = () => {
   const [filteredListOfRestaurant, setFilteredListOfRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const onlineStatus = useOnlineStatus();
-  const PromotedCard = withPromoted(Card);
+
 
   useEffect(() => {
     fetchData();
@@ -83,7 +83,7 @@ const Body = () => {
 
       <div className="card-container">
         {filteredListOfRestaurant.map((restaurant) =>
-          !(restaurant.info.locality) ? (
+          
             <Card
               name={restaurant.info.name}
               cusine={restaurant.info.cuisines.join(", ")}
@@ -91,18 +91,9 @@ const Body = () => {
               eta={restaurant.info.sla.deliveryTime}
               foodImg={FOODIMG + restaurant.info.cloudinaryImageId}
               key={restaurant.info.id}
+              id = {restaurant.info.id}
+              
             />
-          ) : (
-            <PromotedCard
-              key={restaurant.info.id}
-              name={restaurant.info.name}
-              cusine={restaurant.info.cuisines.join(", ")}
-              ratings={restaurant.info.avgRating}
-              eta={restaurant.info.sla.deliveryTime}
-              foodImg={FOODIMG + restaurant.info.cloudinaryImageId}
-              locality={restaurant.info.locality}
-            />
-          )
         )}
       </div>
     </div>
@@ -112,3 +103,4 @@ const Body = () => {
 export default Body;
 
 // data -> cards[4] -> card -> card -> card -> gridElements -> infoWithStyle ->restaurants -> 8elem-> each elem info
+// ttps://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=26.908877821658663&lng=80.97121808677912&restaurantId=636723

@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/Logo.png";
 const Header = () => {
   const [login, setLogin] = useState("Login");
+  const navigate = useNavigate();
   const loginHandler = () => {
     if (login == "Login") setLogin("Logout");
     else setLogin("Login");
   };
   return (
     <div className="header">
-      <div className="logo">
+      <div onClick={()=>navigate("/")} className="logo">
         <img src={Logo} alt="logo" />
       </div>
 
